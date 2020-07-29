@@ -1,0 +1,159 @@
+{
+    "seed": 17,
+
+    "elements": [
+        {
+            "type": "suppliers",
+            "count": 4
+        },
+        {
+            "type": "plants",
+            "count": 3
+        },
+        {
+            "type": "materials",
+            "count": 4
+        },
+        {
+            "type": "timePeriods",
+            "count": 12
+        }
+    ],
+    "modules": [
+        {
+            "type": "arc",
+            "fromElements": [ "suppliers" ],
+            "toElements": [ "plants" ],
+            "distributions": [
+                {
+                    "type": "bernoulli",
+                    "dependingOnElements": [ "suppliers", "plants" ],
+                    "probability": 0.5
+                }
+            ]
+        },
+        {
+            "type": "demand",
+            "forElements": [ "plants", "materials", "timePeriods" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "plants" ],
+                    "type": "uniform",
+                    "min": 10.0,
+                    "max": 10.0
+                }
+            ]
+        },
+        {
+            "type": "allocation",
+            "forElements": [ "suppliers", "plants", "materials", "timePeriods" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "suppliers", "timePeriods" ],
+                    "type": "uniform",
+                    "min": 0.0,
+                    "max": 1.0
+                }
+            ]
+        },
+        {
+            "type": "purchasePrice",
+            "forElements": [ "suppliers", "materials" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "materials" ],
+                    "type": "uniform",
+                    "min": 100,
+                    "max": 2000
+                },
+                {
+                    "dependingOnElements": [ "suppliers" ],
+                    "type": "uniform",
+                    "min": 0.9,
+                    "max": 1.1
+                }
+
+            ]
+        },
+        {
+            "type": "shippingCost",
+            "forElements": [ "suppliers", "plants" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "suppliers", "plants" ],
+                    "type": "uniform",
+                    "min": 30,
+                    "max": 150
+                }
+            ]
+        },
+        {
+            "type": "inventory",
+            "forElements": [ "suppliers" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "suppliers" ],
+                    "type": "uniform",
+                    "min": 7,
+                    "max": 20
+                }
+            ]
+        },
+        {
+            "type": "shippingLane",
+            "forElements": [ "suppliers", "plants" ],
+            "distributionTransportTime": [
+                {
+                    "dependingOnElements": [ "suppliers", "plants" ],
+                    "type": "uniform",
+                    "min": 40,
+                    "max": 100
+                }
+            ],
+            "distributionSafetyStock": [
+                {
+                    "dependingOnElements": [ "suppliers", "plants" ],
+                    "type": "uniform",
+                    "min": 5,
+                    "max": 25
+                }
+            ]
+        },
+        {
+            "type": "capacity",
+            "outputName": "completeCapacity",
+            "forElements": [ "suppliers" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "suppliers" ],
+                    "type": "uniform",
+                    "min": 0,
+                    "max": 110.0
+                },
+                {
+                    "type": "bernoulli",
+                    "dependingOnElements": [ "suppliers" ],
+                    "probability": 0.7
+                }
+            ]
+        },
+        {
+            "type": "capacity",
+            "outputName": "periodCapacity",
+            "forElements": [ "suppliers", "timePeriods" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "suppliers", "timePeriods" ],
+                    "type": "uniform",
+                    "min": 0,
+                    "max": 30
+                },
+                {
+                    "type": "bernoulli",
+                    "dependingOnElements": [ "suppliers" ],
+                    "probability": 0.0
+                }
+            ]
+        }
+    ]
+}

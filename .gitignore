@@ -1,0 +1,8 @@
+**/__pycache__/**
+
+examples/outputs/**
+
+.vs/**
+pip-wheel-metadata
+*.egg-info
+poetry.lock

@@ -1,0 +1,46 @@
+{
+    "elements": [
+        {
+            "type": "suppliers",
+            "count": 5
+        },
+        {
+            "type": "plants",
+            "count": 4
+        }
+    ],
+    "modules": [
+        {
+            "type": "arc",
+            "fromElements": [ "suppliers" ],
+            "toElements": [ "plants" ],
+            "distributions":  "default"
+        },
+
+        {
+            "type": "demand",
+            "forElements": [ "plants" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "plants" ],
+                    "type": "uniform",
+                    "min": 10.0,
+                    "max": 10.0
+                }
+            ]
+        },
+
+        {
+            "type": "shippingCost",
+            "forElements": [ "suppliers", "plants" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "suppliers", "plants" ],
+                    "type": "uniform",
+                    "min": 30,
+                    "max": 150
+                }
+            ]
+        }
+    ]
+}

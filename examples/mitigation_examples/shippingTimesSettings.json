@@ -1,0 +1,48 @@
+{
+    "elements": [
+        {
+            "type": "suppliers",
+            "count": 3
+        },
+        {
+            "type": "plants",
+            "count": 3
+        },
+        {
+            "type": "timePeriods",
+            "count": 3
+        }
+    ],
+    "modules": [
+        {
+            "type": "arc",
+            "fromElements": [ "suppliers" ],
+            "toElements": [ "plants" ],
+            "distributions": "default"
+        },
+        {
+            "type": "demand",
+            "forElements": [ "plants", "timePeriods" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "plants" ],
+                    "type": "uniform",
+                    "min": 0.5,
+                    "max": 0.5
+                }
+            ]
+        },
+        {
+            "type": "shippingTimes",
+            "forElements": [ "suppliers", "plants" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "suppliers", "plants" ],
+                    "type": "uniformIntegral",
+                    "min": 6,
+                    "max": 36
+                }
+            ]
+        }
+    ]
+}

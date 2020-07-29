@@ -1,0 +1,34 @@
+{
+    "elements": [
+        {
+            "type": "suppliers",
+            "count": 3
+        },
+        {
+            "type": "plants",
+            "count": 3
+        },
+        {
+            "type": "materials",    
+            "count": 2
+        },
+        {
+            "type": "timePeriods",
+            "count": 3
+        }
+    ],
+    "modules": [
+        {
+            "type": "demand",
+            "forElements": ["plants", "materials", "timePeriods"],
+            "distributions": [
+                {
+                    "dependingOnElements": ["plants"],
+                    "type": "uniform",
+                    "min": 100,
+                    "max": 500
+                }
+            ]
+        }    
+    ]
+}
