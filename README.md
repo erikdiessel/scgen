@@ -48,5 +48,10 @@ Thus, to create the example file `simpleSettings.json` run:
 
 - Optional output to Excel: creates separate sheets with a formatted for each type of data
 
+## Dependencies
+- Python: Version 3.7
+- Pandas: Version 0.25
+- openpyxl: Version 3.0
+
 ## Background
 Created at [Fraunhofer ITWM, Optimization division](https://www.itwm.fraunhofer.de/)
