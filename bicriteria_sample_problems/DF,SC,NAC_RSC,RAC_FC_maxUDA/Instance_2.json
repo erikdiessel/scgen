@@ -1,10 +1,11 @@
+
 {
-    "seed": 3,
-    
+    "seed": 2,    
+      
     "elements": [
         {
             "type": "suppliers",
-            "count": 8
+            "count": 10
         },
         {
             "type": "plants",
@@ -12,7 +13,7 @@
         },
         {
             "type": "scenarios",
-            "count": 10
+            "count": 12
         }
     ],
     "modules": [
@@ -22,7 +23,7 @@
             "toElements": [ "plants" ],
             "distributions":  "default"
         },
-
+  
         {
             "type": "demand",
             "forElements": [ "plants" ],
@@ -35,7 +36,7 @@
                 }
             ]
         },
-
+  
         {
             "type": "shippingCost",
             "forElements": [ "suppliers", "plants" ],
@@ -43,12 +44,12 @@
                 {
                     "dependingOnElements": [ "suppliers", "plants" ],
                     "type": "uniform",
-                    "min": 30,
-                    "max": 150
+                    "min": 0.9,
+                    "max": 1.1
                 }
             ]
         },
-
+  
         {
             "type": "disruption",
             "forElements": ["suppliers", "scenarios"],
@@ -60,7 +61,7 @@
                 }
             ]
         },
-
+  
         {
             "type": "allocation",
             "forElements": ["suppliers", "plants"],
@@ -70,10 +71,10 @@
                     "type": "uniform",
                     "min": 0.8,
                     "max": 1.2
-                }                
+                }
             ]
         },
-
+  
         {
             "type": "capacity",
             "forElements": ["suppliers"],
@@ -81,12 +82,12 @@
                 {
                     "dependingOnElements": ["suppliers"],
                     "type": "uniform",
-                    "min": 10.0,
-                    "max": 20.0
+                    "min": 3.0,
+                    "max": 6.0
                 }
             ]
         },
-
+  
         {
             "type": "mitigationCapacity",
             "forElements": ["suppliers", "plants", "scenarios"],
@@ -94,24 +95,11 @@
                 {
                     "dependingOnElements": ["suppliers", "plants"],
                     "type": "uniform",
-                    "min": 0.0,
-                    "max": 2.0
-                }
-            ]
-        },
-
-        
-        {
-            "type": "supplierActivationCost",
-            "forElements": ["suppliers"],
-            "distributions": [
-                {
-                    "dependingOnElements": ["suppliers"],
-                    "type": "uniform",
                     "min": 0.5,
-                    "max": 1.5
+                    "max": 2.5
                 }
             ]
         }
     ]
-}
+  }
+  
