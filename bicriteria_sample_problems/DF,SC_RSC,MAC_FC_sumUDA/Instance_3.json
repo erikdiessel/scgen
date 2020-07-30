@@ -1,0 +1,102 @@
+{
+    "seed": 3,
+    "elements": [
+        {
+            "type": "suppliers",
+            "count": 10
+        },
+        {
+            "type": "plants",
+            "count": 10
+        },
+        {
+            "type": "scenarios",
+            "count": 5
+        }
+    ],
+    "modules": [
+        {
+            "type": "arc",
+            "fromElements": [ "suppliers" ],
+            "toElements": [ "plants" ],
+            "distributions":  "default"
+        },
+
+        {
+            "type": "demand",
+            "forElements": [ "plants" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "plants" ],
+                    "type": "uniform",
+                    "min": 10.0,
+                    "max": 10.0
+                }
+            ]
+        },
+
+        {
+            "type": "shippingCost",
+            "forElements": [ "suppliers", "plants" ],
+            "distributions": [
+                {
+                    "dependingOnElements": [ "suppliers", "plants" ],
+                    "type": "uniform",
+                    "min": 30,
+                    "max": 150
+                }
+            ]
+        },
+
+        {
+            "type": "disruption",
+            "forElements": ["suppliers", "scenarios"],
+            "distributions": [
+                {
+                    "dependingOnElements": ["suppliers", "scenarios"],
+                    "type": "bernoulli",
+                    "probability": 0.2
+                }
+            ]
+        },
+
+        {
+            "type": "allocation",
+            "forElements": ["suppliers", "plants"],
+            "distributions": [
+                {
+                    "dependingOnElements": ["suppliers"],
+                    "type": "uniform",
+                    "min": 0.8,
+                    "max": 1.2
+                }                
+            ]
+        },
+
+        {
+            "type": "capacity",
+            "forElements": ["suppliers"],
+            "distributions": [
+                {
+                    "dependingOnElements": ["suppliers"],
+                    "type": "uniform",
+                    "min": 0.0,
+                    "max": 4.0
+                }
+            ]
+        },
+
+        {
+            "type": "mitigationCapacity",
+            "forElements": ["suppliers", "plants", "scenarios"],
+            "distributions": [
+                {
+                    "dependingOnElements": ["suppliers", "plants"],
+                    "type": "uniform",
+                    "min": 0.0,
+                    "max": 2.0
+                }
+            ]
+        }
+    ]
+}
