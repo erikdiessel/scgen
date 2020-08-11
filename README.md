@@ -2,6 +2,9 @@
 
 scgen provides a simple way to generate synthetic supply chain data for various uses. For example it can create supply chain topologies and capacity values.
 
+## Try it out directly
+You can try scgen directly in the browser (everything ready to start in a Jupyter Lab environment): [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/erikdiessel/scgen/master?filepath=notebooks%2FGettingStarted.ipynb)
+
 ## Applications
 - Creating example models for supply chains
 - Creating benchmarks for supply chain optimization algorithms
