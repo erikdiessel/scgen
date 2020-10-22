@@ -10,49 +10,29 @@ def subsets(s):
         yield from combinations(s, cardinality)
 
 def generateJointly(forElements, elementList, distributionSettings, distributionsProvider):
-    """
-
-    distributions: 
-    """    
-
-    elementSubsets = list(subsets(sorted(forElements)))
-    factors = {
-        elementSubset: createDataFrameWithKeys(elementSubset, elementList)
-        for elementSubset in elementSubsets
-        if elementSubset != ()
-    }
-
-    # initialize factors with default value 1:
-    for df in factors.values():
-        df['_value'] = 1.0
-
+    factors = []
     baselineValue = 1.0
 
-    # Overwrite some of the factors, if given by a distribution
     for setting in distributionSettings:
         distributionType = distributionsProvider[setting["type"]]
         instantiatedDistribution = distributionType(**setting)
         distributionForElements = tuple(sorted(setting["dependingOnElements"]))
-        # the case of setting a baseline value is treated differently
-        if distributionForElements == ():
-            baselineValue = instantiatedDistribution.generate()
-        else:
-            # Make sure that this key makes sense in the factors
-            assert distributionForElements in elementSubsets
 
-#             factors[distributionForElements] = factors[distributionForElements].assign(
-#                 _value = lambda _: instantiatedDistribution.generate()
-#             )
-            factors[distributionForElements]['_value'] = [
+        if distributionForElements == ():
+            baselineValue *= instantiatedDistribution.generate()
+        else:
+            df = createDataFrameWithKeys(distributionForElements, elementList)
+            df['_value'] = [
                 instantiatedDistribution.generate()
-                for _ in range(len(factors[distributionForElements]))
+                for _ in range(len(df))
             ]
+            factors.append(df)
 
     values = createDataFrameWithKeys(forElements, elementList)
 
     mergedDfs = [
         pd.merge(values, factor)
-        for factor in factors.values()
+        for factor in factors
     ]
 
     factorProduct = reduce(
@@ -71,7 +51,3 @@ def generateJointly(forElements, elementList, distributionSettings, distribution
     factorProduct['_value'] *= baselineValue 
 
     return factorProduct
-
-    # values['_value'] = baselineValue * factorProduct
-
-    # return values
