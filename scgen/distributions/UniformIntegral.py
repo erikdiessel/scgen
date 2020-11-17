@@ -12,5 +12,5 @@ class UniformIntegral(Distribution):
     def generate(self):
         try: 
             return randint(self.__min, self.__max)
-        except ValueError:
-            raise ValueError(f"The parameters of the uniformIntegral-distribution are invalid: min: {self.min}, max: {self.max}")
+        except ValueError as e:
+            raise ValueError(f"The parameters min={self.__min}, max={self.__max} of the uniformIntegral distribution are invalid: {e}")
